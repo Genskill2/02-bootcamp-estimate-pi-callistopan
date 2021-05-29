@@ -1,4 +1,5 @@
 import math
+import random
 import unittest
 
 def wallis(iter):
@@ -13,13 +14,18 @@ def wallis(iter):
 
 
 def monte_carlo(i):
-    s = 1
-    for i in range(1, i):
-        x = 4 * (i ** 2)
-        x = x / (x - 1)
+    inside=0
 
-        s *= x
-    return 2 * s
+
+    for i in range(0, i):
+        x=random.random()**2
+        y=random.random()**2
+        if math.sqrt(x+y)<1.0:
+            inside+=1
+    s=(float(inside)/i)*4
+    return s
+
+
 
 
 class TestWallis(unittest.TestCase):
@@ -37,7 +43,7 @@ class TestWallis(unittest.TestCase):
 class TestMC(unittest.TestCase):
     def test_randomness(self):
         pi0 = monte_carlo(15000)
-        pi1 = monte_carlo(15001)
+        pi1 = monte_carlo(15000)
         
         self.assertNotEqual(pi0, pi1, "Two different estimates for PI are exactly the same. This is almost impossible.")
 
