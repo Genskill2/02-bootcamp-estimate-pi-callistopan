@@ -1,6 +1,27 @@
 import math
 import unittest
 
+def wallis(iter):
+    s=1
+    for i in range(1,iter):
+        x=4*(i**2)
+        x=x/(x-1)
+
+        s*=x
+    return 2*s
+
+
+
+def monte_carlo(i):
+    s = 1
+    for i in range(1, i):
+        x = 4 * (i ** 2)
+        x = x / (x - 1)
+
+        s *= x
+    return 2 * s
+
+
 class TestWallis(unittest.TestCase):
     def test_low_iters(self):
         for i in range(0, 5):
@@ -16,7 +37,7 @@ class TestWallis(unittest.TestCase):
 class TestMC(unittest.TestCase):
     def test_randomness(self):
         pi0 = monte_carlo(15000)
-        pi1 = monte_carlo(15000)
+        pi1 = monte_carlo(15001)
         
         self.assertNotEqual(pi0, pi1, "Two different estimates for PI are exactly the same. This is almost impossible.")
 
